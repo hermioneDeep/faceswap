@@ -421,7 +421,7 @@ class Batcher():
         logger.trace("Training one step: (side: %s)", self._side)
         model_inputs, model_targets = self._get_next()
         try:
-            loss = self._model.predictors[self._side].train_on_batch(model_inputs, model_targets)
+            loss = self._model.predictors[self._side].fit(model_inputs, model_targets, epochs = 32, batch_size = 8)
         except tf_errors.ResourceExhaustedError as err:
             msg = ("You do not have enough GPU memory available to train the selected model at "
                    "the selected settings. You can try a number of things:"
